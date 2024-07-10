@@ -1,0 +1,10 @@
+.vscode
+.DS_Store
+/homepage
+/react-electoral-map
+/react-to-do
+/react-course-admin
+
+# sensitive
+.conf*
+.env
