@@ -1,34 +1,34 @@
-name: Deploy to Staging Env
+# name: Deploy to Staging Env
 
-# configure manual trigger only 
-on: workflow_dispatch
+# # configure manual trigger only 
+# on: workflow_dispatch
 
-env: 
-  ENV: staging
-  DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  ENVS: ${{ secrets.STAGING_ENVS }}
+# env: 
+#   ENV: staging
+#   DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+#   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+#   ENVS: ${{ secrets.STAGING_ENVS }}
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Docker Login
-        run:
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.STAGING_EC2_HOSTNAME  }}
-          username: ${{ secrets.EC2_USERNAME  }}
-          key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
-          port: 22
-          envs: ENV, ENVS
-          script: |
-            cd techneip-k8
-            echo "$ENVS" > .env
-            git pull origin $ENV
-            sudo docker compose pull
-            docker compose -f docker-compose.yml --env-file .env build --no-cache && docker compose up -d
-            docker system prune -a -f
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Docker Login
+#         run:
+#           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+#       - name: executing remote ssh commands using ssh key
+#         uses: appleboy/ssh-action@v1.0.3
+#         with:
+#           host: ${{ secrets.STAGING_EC2_HOSTNAME  }}
+#           username: ${{ secrets.EC2_USERNAME  }}
+#           key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
+#           port: 22
+#           envs: ENV, ENVS
+#           script: |
+#             cd techneip-k8
+#             echo "$ENVS" > .env
+#             git pull origin $ENV
+#             sudo docker compose pull
+#             docker compose -f docker-compose.yml --env-file .env build --no-cache && docker compose up -d
+#             docker system prune -a -f
