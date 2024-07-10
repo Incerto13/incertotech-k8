@@ -28,6 +28,15 @@ services:
     image: incerto13/react-course-admin_server:${ENV}-latest
     ports:
       - 8111:3001
+
+  react-electoral-map:
+    container_name: react-electoral-map
+    environment:
+      ENV: ${ENV}
+    image: incerto13/react-electoral-map:${ENV}-latest
+    restart: unless-stopped
+    ports:
+      - 8012:80
     
   # react-to-do
   react-to-do_web:
