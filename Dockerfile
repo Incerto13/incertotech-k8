@@ -3,10 +3,7 @@ FROM ubuntu:20.04
 ENV TZ=America/New_York \
     DEBIAN_FRONTEND=noninteractive
 
-# RUN apt update && \
-#     apt-get install tzdata
-
-RUN apt update && apt install -y apache2 && install tzdata
+RUN apt update && apt install -y apache2
 
 RUN a2enmod proxy
 RUN a2enmod proxy_http
