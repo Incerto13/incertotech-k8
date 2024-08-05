@@ -2,19 +2,25 @@
 
 services:
 
-  apache:
-    container_name: apache-server
+  nginx-proxy:
+    container_name: nginx-proxy
+    environment:
+      ENV: ${ENV}
+    image: nginx:latest
+    ports:
+    - 80:80
+    volumes:
+    - ./.conf-${ENV}:/etc/nginx/conf.d/default.conf
+
+  homepage:
+    container_name: homepage
     environment:
       ENV: ${ENV}
     image: httpd:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
-    - '80:80'
+    - 8080:80
     volumes:
     - ./homepage:/usr/local/apache2/htdocs
-    - ./.conf-${ENV}:/usr/local/apache2/conf/httpd.conf:ro
 
   # react-course-admin
   react-course-admin_web:
