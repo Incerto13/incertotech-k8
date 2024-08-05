@@ -7,6 +7,9 @@ services:
     environment:
       ENV: ${ENV}
     image: httpd:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
     - '80:80'
     volumes:
