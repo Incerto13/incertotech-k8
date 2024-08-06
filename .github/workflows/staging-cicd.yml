@@ -8,7 +8,7 @@ env:
   DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   ENVS: ${{ secrets.STAGING_ENVS }}
-  APACHE_CONF: ${{ secrets.STAGING_APACHE_CONF }}
+  NGINX_CONF: ${{ secrets.STAGING_NGINX_CONF }}
 
 jobs:
   build:
@@ -25,11 +25,11 @@ jobs:
           username: ${{ secrets.EC2_USERNAME  }}
           key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
           port: 22
-          envs: ENV, ENVS, APACHE_CONF
+          envs: ENV, ENVS, NGINX_CONF
           script: |
             cd incertotech-k8
             echo "$ENVS" > .env
-            echo "$APACHE_CONF" > ".conf-${ENV}"
+            echo "$NGINX_CONF" > ".conf-${ENV}"
             git pull origin $ENV
             docker system prune -a -f
             sudo docker compose pull
