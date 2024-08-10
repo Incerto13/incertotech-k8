@@ -16,11 +16,9 @@ services:
     container_name: homepage
     environment:
       ENV: ${ENV}
-    image: httpd:latest
+    image: incerto13/homepage:${ENV}-latest
     ports:
     - 8080:80
-    volumes:
-    - ./homepage:/usr/local/apache2/htdocs
 
   # react-course-admin
   react-course-admin_web:

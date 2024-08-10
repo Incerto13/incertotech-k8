@@ -1,16 +1,25 @@
 # !/bin/bash
 
-# expand homepage links and generate final index.html file
-bash expand-homepage-links.sh homepage/index-no-links.html homepage/index.html
+# Note: env variables should be set to local-k8
 
-# create .env files for react apps
-source .env
-echo REACT_APP_TO_DO_DOMAIN_SERVER=$REACT_APP_TO_DO_DOMAIN_SERVER > react-to-do/web/.env
-echo REACT_APP_COURSE_ADMIN_DOMAIN_SERVER=$REACT_APP_COURSE_ADMIN_DOMAIN_SERVER > react-course-admin/web/.env
+echo building portfolio projects locally to run in docker...
 
-# run all docker-compose.dev.yml files in root and child directories
-docker-compose -f docker-compose.dev.yml  -f  react-to-do/docker-compose.dev.yml  -f  react-electoral-map/docker-compose.dev.yml  -f  react-course-admin/docker-compose.dev.yml up --build -d
+# navigate to all projects and run docker from respective root directories
+cd homepage
+bash run-docker.dev.sh
+cd ..
+cd react-course-admin
+bash run-docker.dev.sh
+cd ..
+cd react-electoral-map
+bash run-docker.dev.sh
+cd ..
+cd react-to-do
+bash run-docker.dev.sh
+cd ..
 
+# run nginx proxy server is not needed (and won't work) in local dev
 
-
+echo hompeage and portfolio projects successfully built and running in docker
+echo hompage is now running on: http://localhost:8080
 
