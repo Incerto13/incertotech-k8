@@ -8,3 +8,4 @@
 # sensitive
 .conf*
 .env
+/certbot

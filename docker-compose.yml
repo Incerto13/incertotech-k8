@@ -7,16 +7,29 @@ services:
     environment:
       ENV: ${ENV}
     image: nginx:latest
+    restart: unless-stopped
     ports:
     - 80:80
+    - 443:443
     volumes:
-    - ./.conf-${ENV}:/etc/nginx/conf.d/default.conf
+      - ./.conf-${ENV}:/etc/nginx/conf.d/default.conf:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+
+  certbot:
+    container_name: certbot
+    image: certbot/certbot:latest
+    restart: unless-stopped
+    volumes: 
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
   homepage:
     container_name: homepage
     environment:
       ENV: ${ENV}
     image: incerto13/homepage:${ENV}-latest
+    restart: unless-stopped
     ports:
     - 8080:80
 
@@ -26,6 +39,7 @@ services:
     environment:
       ENV: ${ENV}
     image: incerto13/react-course-admin_web:${ENV}-latest
+    restart: unless-stopped
     ports:
       - 8011:80
   react-course-admin_server:
@@ -33,6 +47,7 @@ services:
     environment:
       ENV: ${ENV}
     image: incerto13/react-course-admin_server:${ENV}-latest
+    restart: unless-stopped
     ports:
       - 8111:3001
 
@@ -51,6 +66,7 @@ services:
     environment:
       ENV: ${ENV}
     image: incerto13/react-to-do_web:${ENV}-latest
+    restart: unless-stopped
     ports:
       - 8010:80
   react-to-do_server:
@@ -58,5 +74,6 @@ services:
     environment:
       ENV: ${ENV}
     image: incerto13/react-to-do_server:${ENV}-latest
+    restart: unless-stopped
     ports:
       - 8110:3001
