@@ -1,0 +1,25 @@
+
+services: 
+
+  certbot_init:
+    container_name: certbot_init
+    image: certbot/certbot
+    environment:
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      DOMAINS: ${DOMAINS}
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email "$LETSENCRYPT_EMAIL" -d "$DOMAINS" --agree-tos
+
+  certbot_renew:
+    container_name: certbot_renew
+    image: certbot/certbot
+    environment:
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      DOMAINS: ${DOMAINS}
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --renew --email "$LETSENCRYPT_EMAIL" -d "$DOMAINS" --agree-tos
+

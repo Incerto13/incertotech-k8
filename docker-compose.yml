@@ -16,17 +16,6 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     
-  certbot:
-    container_name: certbot
-    image: certbot/certbot
-    environment:
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-      DOMAINS: ${DOMAINS}
-    volumes: 
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email "$LETSENCRYPT_EMAIL" -d "$DOMAINS" --agree-tos
-
   homepage:
     container_name: homepage
     environment:
