@@ -37,22 +37,22 @@ services:
     - 8080:80
 
   # react-course-admin
-  react-course-admin_web:
-    container_name: react-course-admin_web
-    environment:
-      ENV: ${ENV}
-    image: incerto13/react-course-admin_web:${ENV}-latest
-    restart: unless-stopped
-    ports:
-      - 8011:80
-  react-course-admin_server:
-    container_name: react-course-admin_server
-    environment:
-      ENV: ${ENV}
-    image: incerto13/react-course-admin_server:${ENV}-latest
-    restart: unless-stopped
-    ports:
-      - 8111:3001
+  # react-course-admin_web:
+  #   container_name: react-course-admin_web
+  #   environment:
+  #     ENV: ${ENV}
+  #   image: incerto13/react-course-admin_web:${ENV}-latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8011:80
+  # react-course-admin_server:
+  #   container_name: react-course-admin_server
+  #   environment:
+  #     ENV: ${ENV}
+  #   image: incerto13/react-course-admin_server:${ENV}-latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8111:3001
 
   react-electoral-map:
     container_name: react-electoral-map
@@ -64,19 +64,19 @@ services:
       - 8012:80
     
   # react-to-do
-  react-to-do_web:
-    container_name: react-to-do_web
-    environment:
-      ENV: ${ENV}
-    image: incerto13/react-to-do_web:${ENV}-latest
-    restart: unless-stopped
-    ports:
-      - 8010:80
-  react-to-do_server:
-    container_name: react-to-do_server
-    environment:
-      ENV: ${ENV}
-    image: incerto13/react-to-do_server:${ENV}-latest
-    restart: unless-stopped
-    ports:
-      - 8110:3001
+  # react-to-do_web:
+  #   container_name: react-to-do_web
+  #   environment:
+  #     ENV: ${ENV}
+  #   image: incerto13/react-to-do_web:${ENV}-latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8010:80
+  # react-to-do_server:
+  #   container_name: react-to-do_server
+  #   environment:
+  #     ENV: ${ENV}
+  #   image: incerto13/react-to-do_server:${ENV}-latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8110:3002
