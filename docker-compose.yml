@@ -79,4 +79,4 @@ services:
     image: incerto13/react-to-do_server:${ENV}-latest
     restart: unless-stopped
     ports:
-      - 8110:3002
+      - 8110:3001
