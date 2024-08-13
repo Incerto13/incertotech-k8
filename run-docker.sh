@@ -9,3 +9,4 @@ source .env
 
 # run server and apps
 docker compose build --no-cache && docker compose up --force-recreate -d
+# docker compose -f docker-compose.yml --env-file .env build --no-cache && docker compose up --force-recreate -d
