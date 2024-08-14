@@ -1,8 +1,20 @@
+# these containers are only used for attaining and periodically renewing ssl certs
 
 services: 
 
-  certbot_init:
-    container_name: certbot_init
+  nginx:
+    container_name: nginx
+    environment:
+      ENV: ${ENV}
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+    - 80:80
+    volumes:
+      - ./.conf-init-ssl-challenge:/etc/nginx/conf.d/default.conf
+
+  certbot-init:
+    container_name: certbot
     image: certbot/certbot
     environment:
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
@@ -12,8 +24,8 @@ services:
       - ./certbot/www:/var/www/certbot
     command: certonly --webroot -w /var/www/certbot --force-renewal --email "$LETSENCRYPT_EMAIL" -d "$DOMAINS" --agree-tos
 
-  certbot_renew:
-    container_name: certbot_renew
+  certbot-renew:
+    container_name: certbot-renew
     image: certbot/certbot
     environment:
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
