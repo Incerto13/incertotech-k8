@@ -12,6 +12,8 @@ services:
     - 80:80
     volumes:
       - ./.conf-init-ssl-challenge:/etc/nginx/conf.d/default.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
 
   certbot-init:
     container_name: certbot-init
