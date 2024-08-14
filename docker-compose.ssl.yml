@@ -14,15 +14,23 @@ services:
       - ./.conf-init-ssl-challenge:/etc/nginx/conf.d/default.conf
 
   certbot-init:
-    container_name: certbot
+    container_name: certbot-init
     image: certbot/certbot
     environment:
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-      DOMAINS: ${DOMAINS}
+      BASE_DOMAIN: ${BASE_DOMAIN} 
+      REACT_COURSE_ADMIN_DOMAIN: ${REACT_COURSE_ADMIN_DOMAIN}
+      REACT_ELECTORAL_MAP_DOMAIN: ${REACT_ELECTORAL_MAP_DOMAIN}
+      REACT_TO_DO_DOMAIN: ${REACT_TO_DO_DOMAIN}
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email "$LETSENCRYPT_EMAIL" -d "$DOMAINS" --agree-tos
+    command: >
+      sh -c "
+        certonly --webroot -w /var/www/certbot --force-renewal 
+        --email "$LETSENCRYPT_EMAIL" -d "$BASE_DOMAIN" 
+        -d "$REACT_COURSE_ADMIN_DOMAIN" -d "$REACT_ELECTORAL_MAP_DOMAIN" 
+        -d "$REACT_TO_DO_DOMAIN" --agree-tos"
 
   certbot-renew:
     container_name: certbot-renew
