@@ -13,8 +13,8 @@ services:
     - 443:443
     volumes:
       - ./.conf-${ENV}:/etc/nginx/conf.d/default.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./staging/conf:/etc/letsencrypt  # change volume dir as needed but never path within container
+      - ./staging/www:/var/www/certbot  # change volume dir as needed but never path within container
     
   homepage:
     container_name: homepage
