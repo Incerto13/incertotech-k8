@@ -1,0 +1,6 @@
+TODO: document how the certbot process works!
+- only run this when logged into staging / prod EC2s?
+- how often, only when expired? etc...
+- need to change volume directory each time you renew or add subdomains??
+
+TODO: move .conf files into an nginx directory

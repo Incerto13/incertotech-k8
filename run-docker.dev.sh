@@ -2,23 +2,37 @@
 
 # Note: env variables should be set to local-k8
 
+make docker-clean
+
 echo building portfolio projects locally to run in docker...
 
 # navigate to all projects and run docker from respective root directories
+
+# homepage
 cd homepage
 bash run-docker.dev.sh
-cd ..
-cd react-course-admin
-bash run-docker.dev.sh
-cd ..
-cd react-electoral-map
-bash run-docker.dev.sh
-cd ..
-cd react-to-do
-bash run-docker.dev.sh
+echo homepage is now running...
 cd ..
 
-# run nginx proxy server is not needed (and won't work) in local dev
+# react-course-admin
+cd react-course-admin
+bash run-docker.dev.sh
+echo react-course-admin is now running...
+cd ..
+
+# react-electoral-map
+cd react-electoral-map
+bash run-docker.dev.sh
+echo react-electoral-map is now running...
+cd ..
+
+# react-to-do
+cd react-to-do
+bash run-docker.dev.sh
+echo react-to-do is now running...
+cd ..
+
+# nginx proxy server is not needed (and won't work) in local dev
 
 echo hompeage and portfolio projects successfully built and running in docker
 echo hompage is now running on: http://localhost:8080
