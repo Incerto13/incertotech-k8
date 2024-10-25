@@ -30,6 +30,7 @@ jobs:
             cd incertotech-k8
             echo "$ENVS" > .env
             echo "$NGINX_CONF" > ".conf-${ENV}"
+            cat .env
             git pull origin $ENV
             docker system prune -a -f
             sudo docker compose pull
