@@ -28,7 +28,7 @@ jobs:
           envs: ENV, ENVS, NGINX_CONF
           script: |
             cd incertotech-k8
-            echo "$ENVS" > .env
+            echo "$ENVS" | sudo tee .env > /dev/null
             echo "$NGINX_CONF" > ".conf-${ENV}"
             cat .env
             git pull origin $ENV
