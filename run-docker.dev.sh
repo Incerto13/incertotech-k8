@@ -14,10 +14,10 @@ bash run-docker.dev.sh
 echo homepage is now running...
 cd ..
 
-# react-course-admin
-cd react-course-admin
+# react-to-do
+cd react-to-do
 bash run-docker.dev.sh
-echo react-course-admin is now running...
+echo react-to-do is now running...
 cd ..
 
 # react-electoral-map
@@ -26,10 +26,10 @@ bash run-docker.dev.sh
 echo react-electoral-map is now running...
 cd ..
 
-# react-to-do
-cd react-to-do
+# react-course-admin
+cd react-course-admin
 bash run-docker.dev.sh
-echo react-to-do is now running...
+echo react-course-admin is now running...
 cd ..
 
 # nginx proxy server is not needed (and won't work) in local dev

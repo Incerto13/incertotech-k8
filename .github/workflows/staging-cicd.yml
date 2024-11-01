@@ -1,5 +1,7 @@
 name: Deploy to Staging Env
 
+# TODO: change ".conf-${ENV}" name to something like "nginx/default.conf-${ENV}"
+
 # configure manual trigger only 
 on: workflow_dispatch
 
@@ -8,7 +10,7 @@ env:
   DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   ENVS: ${{ secrets.STAGING_ENVS }}
-  NGINX_CONF: ${{ secrets.STAGING_NGINX_CONF }}
+  NGINX_DEFAULT_CONF: ${{ secrets.STAGING_NGINX_DEFAULT_CONF }}
 
 jobs:
   build:
@@ -25,12 +27,11 @@ jobs:
           username: ${{ secrets.EC2_USERNAME  }}
           key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
           port: 22
-          envs: ENV, ENVS, NGINX_CONF
+          envs: ENV, ENVS, NGINX_DEFAULT_CONF
           script: |
             cd incertotech-k8
             echo "$ENVS" | sudo tee .env > /dev/null
-            echo "$NGINX_CONF" > ".conf-${ENV}"
-            cat .env
+            echo "$NGINX_DEFAULT_CONF" > "nginx/default.conf-${ENV}"
             git pull origin $ENV
             docker system prune -a -f
             sudo docker compose pull
