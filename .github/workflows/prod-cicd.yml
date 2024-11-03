@@ -1,14 +1,14 @@
-name: Deploy to Staging Env
+name: Deploy to Prod Env
 
 # configure manual trigger only 
 on: workflow_dispatch
 
 env: 
-  ENV: staging
+  ENV: prod
   DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  ENVS: ${{ secrets.STAGING_ENVS }}
-  NGINX_DEFAULT_CONF: ${{ secrets.STAGING_NGINX_DEFAULT_CONF }}
+  ENVS: ${{ secrets.PROD_ENVS }}
+  NGINX_DEFAULT_CONF: ${{ secrets.PROD_NGINX_DEFAULT_CONF }}
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         with:
           host: ${{ secrets.STAGING_EC2_HOSTNAME  }}
           username: ${{ secrets.EC2_USERNAME  }}
-          key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
+          key: ${{ secrets.PROD_AWS_PRIVATE_KEY  }}
           port: 22
           envs: ENV, ENVS, NGINX_DEFAULT_CONF
           script: |
