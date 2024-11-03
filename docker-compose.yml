@@ -13,8 +13,8 @@ services:
     volumes:
     #TODO: move the .conf-${ENV} file into an nginx folder (ignore the folder) in the repo and rename file to default.conf-${ENV}
       - ./nginx/default.conf-${ENV}:/etc/nginx/conf.d/default.conf
-      - ./staging/conf:/etc/letsencrypt  # change volume dir as needed but never path within container
-      - ./staging/www:/var/www/certbot  # change volume dir as needed but never path within container
+      - ./certbot/conf:/etc/letsencrypt  # change volume dir as needed but never path within container
+      - ./certbot/www:/var/www/certbot  # change volume dir as needed but never path within container
 
 # homepage  
   homepage:
