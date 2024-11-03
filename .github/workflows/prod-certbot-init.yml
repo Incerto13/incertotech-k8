@@ -35,4 +35,6 @@ jobs:
             docker system prune -a -f
             sudo docker compose pull
             bash run-certbot-init.sh 
+            sleep 60
+            docker kill $(docker ps -q)
 
