@@ -33,7 +33,7 @@ services:
       POSTGRES_USER: postgres      
       POSTGRES_PASSWORD: postgres
     ports:
-      - "${REACT_TO_DO_POSTGRES_PORT}:5432"
+      - "${REACT_TO_DO_POSTGRES_PORT}:${REACT_TO_DO_POSTGRES_PORT}"
     restart: unless-stopped
   react-to-do_web:
     container_name: react-to-do_web
@@ -68,7 +68,7 @@ services:
       POSTGRES_USER: postgres      
       POSTGRES_PASSWORD: postgres
     ports:
-      - "${REACT_COURSE_ADMIN_POSTGRES_PORT}:5432"
+      - "${REACT_COURSE_ADMIN_POSTGRES_PORT}:${REACT_COURSE_ADMIN_POSTGRES_PORT}"
     restart: unless-stopped
   react-course-admin_web:
     container_name: react-course-admin_web
