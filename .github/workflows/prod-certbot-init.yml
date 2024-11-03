@@ -1,4 +1,4 @@
-name: Deploy to Prod Env
+name: Run Certbot in Prod Env
 
 # configure manual trigger only 
 on: workflow_dispatch
