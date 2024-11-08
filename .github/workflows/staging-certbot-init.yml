@@ -21,7 +21,7 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.PROD_EC2_HOSTNAME  }}
+          host: ${{ secrets.STAGING_EC2_HOSTNAME  }}
           username: ${{ secrets.EC2_USERNAME  }}
           key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
           port: 22
