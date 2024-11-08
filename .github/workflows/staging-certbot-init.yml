@@ -23,7 +23,7 @@ jobs:
         with:
           host: ${{ secrets.PROD_EC2_HOSTNAME  }}
           username: ${{ secrets.EC2_USERNAME  }}
-          key: ${{ secrets.PROD_AWS_PRIVATE_KEY  }}
+          key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
           port: 22
           envs: ENV, ENVS, NGINX_INIT_SSL_CONF
           script: |
