@@ -1,4 +1,4 @@
-name: Run Certbot in Staging Env
+name: Run Certbot Init in Staging Env
 
 # configure manual trigger only 
 on: workflow_dispatch
@@ -11,7 +11,7 @@ env:
   NGINX_INIT_SSL_CONF: ${{ secrets.NGINX_INIT_SSL_CONF }}
 
 jobs:
-  certbot:
+  certbot-init:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,9 +21,9 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.PROD_EC2_HOSTNAME  }}
+          host: ${{ secrets.STAGING_EC2_HOSTNAME  }}
           username: ${{ secrets.EC2_USERNAME  }}
-          key: ${{ secrets.PROD_AWS_PRIVATE_KEY  }}
+          key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
           port: 22
           envs: ENV, ENVS, NGINX_INIT_SSL_CONF
           script: |
