@@ -57,7 +57,8 @@ services:
     image: incerto13/react-electoral-map:${ENV}-latest
     restart: unless-stopped
     ports:
-      - 8012:80
+      - "${REACT_ELECTORAL_MAP_PORT}:80"
+            
     
 # react-course-admin
   react-course-admin_postgres:
