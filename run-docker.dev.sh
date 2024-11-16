@@ -32,6 +32,12 @@ bash run-docker.dev.sh
 echo react-course-admin is now running...
 cd ..
 
+# nest-blog-api
+cd nest-blog-api
+bash run-docker.dev.sh
+echo nest-blog-api is now running...
+cd ..
+
 # nginx proxy server is not needed (and won't work) in local dev
 
 echo hompeage and portfolio projects successfully built and running in docker
