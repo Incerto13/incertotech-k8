@@ -33,7 +33,7 @@ services:
     command: >
           sh -c "certbot certonly \
             --webroot -w /var/www/certbot \
-            --expand \
+            --force-renewal \
             --email ${LETSENCRYPT_EMAIL} \
             -d ${BASE_DOMAIN} \
             -d ${REACT_TO_DO_DOMAIN} \
