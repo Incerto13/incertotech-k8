@@ -33,7 +33,7 @@ services:
     command: >
           sh -c "certonly \
             --webroot -w /var/www/certbot \
-            --force-renewal \
+            --expand \
             --email ${LETSENCRYPT_EMAIL} \
             -d ${BASE_DOMAIN} \
             -d ${REACT_TO_DO_DOMAIN} \
@@ -61,7 +61,7 @@ services:
       - ./certbot/www:/var/www/certbot
     command: >
           sh -c "--webroot -w /var/www/certbot \
-            --renew \
+            --force-renewal \
             --email ${LETSENCRYPT_EMAIL} \
             -d ${BASE_DOMAIN} \
             -d ${REACT_TO_DO_DOMAIN} \
