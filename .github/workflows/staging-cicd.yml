@@ -31,7 +31,8 @@ jobs:
             echo "$ENVS" | sudo tee .env > /dev/null
             mkdir -p nginx 
             echo "$NGINX_DEFAULT_CONF" > "nginx/default.conf-${ENV}"
-            git pull origin $ENV
+            git checkout staging
+            git pull origin staging
             docker system prune -a -f
             sudo docker compose pull
             bash run-docker.sh 

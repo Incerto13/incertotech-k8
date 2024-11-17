@@ -4,6 +4,7 @@
 /react-electoral-map
 /react-to-do
 /react-course-admin
+/nest-blog-api
 
 # sensitive
 .conf*
