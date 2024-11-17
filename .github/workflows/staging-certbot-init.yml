@@ -39,4 +39,3 @@ jobs:
             sleep 60
             docker kill $(docker ps -q)
             docker system prune -a -f
-
