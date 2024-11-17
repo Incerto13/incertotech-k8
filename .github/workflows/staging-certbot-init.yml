@@ -29,10 +29,7 @@ jobs:
           script: |
             docker kill $(docker ps -q)
             docker system prune -a -f
-            docker volume prune -f
             cd incertotech-k8
-            sudo rm -rf certbot
-            sudo rm -rf /etc/letsencrypt
             echo "$ENVS" | sudo tee .env > /dev/null
             mkdir -p nginx 
             echo "$NGINX_INIT_SSL_CONF" > nginx/default.conf-init-ssl-challenge
