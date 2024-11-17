@@ -34,8 +34,8 @@ jobs:
             mkdir -p nginx 
             echo "$NGINX_INIT_SSL_CONF" > nginx/default.conf-init-ssl-challenge
             git pull origin $ENV
-            docker system prune -a -f
             sudo docker compose pull
             bash run-certbot-init.sh 
             sleep 60
             docker kill $(docker ps -q)
+            docker system prune -a -f
