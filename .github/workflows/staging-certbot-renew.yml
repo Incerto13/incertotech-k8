@@ -37,6 +37,4 @@ jobs:
             docker system prune -a -f
             sudo docker compose pull
             bash run-certbot-renew.sh 
-            sleep 60
-            docker kill $(docker ps -q)
 
