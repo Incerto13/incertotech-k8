@@ -33,7 +33,8 @@ jobs:
             echo "$ENVS" | sudo tee .env > /dev/null
             mkdir -p nginx 
             echo "$NGINX_INIT_SSL_CONF" > nginx/default.conf-init-ssl-challenge
-            git pull origin $ENV
+            git checkout staging
+            git pull origin staging
             sudo docker compose pull
             bash run-certbot-init.sh 
             sleep 60
