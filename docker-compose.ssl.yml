@@ -29,6 +29,7 @@ services:
       NEST_COURSE_ADMIN_API_DOMAIN: ${NEST_COURSE_ADMIN_API_DOMAIN}
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     entrypoint: ["sleep", "infinity"]
 
     # command: >
