@@ -1,4 +1,4 @@
-name: Run Certbot Init in Staging Env
+name: Run Certbot in Staging Env
 
 # configure manual trigger only 
 on: workflow_dispatch
