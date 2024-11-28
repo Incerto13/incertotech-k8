@@ -6,10 +6,11 @@ source .env
 docker compose -f docker-compose.ssl.yml up nginx certbot-init -d
 
 # init/renew/expand domains
-docker exec -it certbot-init sh -c "\
+docker exec certbot-init sh -c "\
   certbot certonly \
     --webroot -w /var/www/certbot \
     --force-renewal \
+    --non-interactive \
     --email ${LETSENCRYPT_EMAIL} \
     -d ${BASE_DOMAIN} \
     -d ${REACT_TO_DO_DOMAIN} \
@@ -21,4 +22,4 @@ docker exec -it certbot-init sh -c "\
     --agree-tos"
 
 # list all the domains on certificates
-docker exec -it certbot-init certbot certificates
+docker exec certbot-init certbot certificates

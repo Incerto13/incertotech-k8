@@ -37,6 +37,7 @@ jobs:
             git pull origin main
             sudo docker compose -f docker-compose.ssl.yml pull
             bash run-certbot-init.sh 
+            echo sleep 60 seconds...
             sleep 60
             docker kill $(docker ps -q)
             docker system prune -a -f
