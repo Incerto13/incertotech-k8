@@ -35,7 +35,7 @@ jobs:
             echo "$NGINX_SSL_CHALLENGE_CONF" > "nginx/default.conf-ssl-challenge-${ENV}"
             git checkout main
             git pull origin main
-            sudo docker compose pull
+            sudo docker compose -f docker-compose.ssl.yml pull
             bash run-certbot-init.sh 
             sleep 60
             docker kill $(docker ps -q)
