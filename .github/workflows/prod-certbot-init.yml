@@ -1,16 +1,17 @@
-name: Run Certbot Revoke in Staging Env
+name: Run Certbot Init in Prod Env
 
 # configure manual trigger only 
 on: workflow_dispatch
 
 env: 
-  ENV: staging
+  ENV: prod
   DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  ENVS: ${{ secrets.STAGING_ENVS }}
+  ENVS: ${{ secrets.PROD_ENVS }}
+  NGINX_SSL_CHALLENGE_CONF: ${{ secrets.PROD_NGINX_SSL_CHALLENGE_CONF }}
 
 jobs:
-  certbot-revoke:
+  certbot-init:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,20 +21,22 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.STAGING_EC2_HOSTNAME  }}
+          host: ${{ secrets.PROD_EC2_HOSTNAME  }}
           username: ${{ secrets.EC2_USERNAME  }}
-          key: ${{ secrets.STAGING_AWS_PRIVATE_KEY  }}
+          key: ${{ secrets.PROD_AWS_PRIVATE_KEY  }}
           port: 22
-          envs: ENVS
+          envs: ENV, ENVS, NGINX_SSL_CHALLENGE_CONF
           script: |
             docker kill $(docker ps -q)
             docker system prune -a -f
             cd incertotech-k8
             echo "$ENVS" | sudo tee .env > /dev/null
-            git checkout staging
-            git pull origin staging
+            mkdir -p nginx 
+            echo "$NGINX_SSL_CHALLENGE_CONF" > "nginx/default.conf-ssl-challenge-${ENV}"
+            git checkout main
+            git pull origin main
             sudo docker compose -f docker-compose.ssl.yml pull
-            bash run-certbot-revoke.sh 
+            bash run-certbot-init.sh 
             echo sleep 60 seconds...
             sleep 60
             docker kill $(docker ps -q)
