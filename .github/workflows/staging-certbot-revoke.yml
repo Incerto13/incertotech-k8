@@ -11,7 +11,7 @@ env:
   NGINX_SSL_CHALLENGE_CONF: ${{ secrets.STAGING_NGINX_SSL_CHALLENGE_CONF }}
 
 jobs:
-  certbot-init:
+  certbot-revoke:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
             git pull origin staging
             sudo docker compose -f docker-compose.ssl.yml pull
             bash run-certbot-revoke.sh 
-            echo sleep 60 seconds...
-            sleep 60
-            docker kill $(docker ps -q)
-            docker system prune -a -f
+        # echo sleep 60 seconds...
+        # sleep 60
+        # docker kill $(docker ps -q)
+        # docker system prune -a -f
