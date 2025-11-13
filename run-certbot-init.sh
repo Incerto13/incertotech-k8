@@ -21,5 +21,5 @@ docker exec certbot-init sh -c "\
     -d ${NEST_COURSE_ADMIN_API_DOMAIN} \
     --agree-tos"
 
-# list all the domains on certificates
+# list all the domains on certificate
 docker exec certbot-init certbot certificates
