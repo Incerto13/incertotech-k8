@@ -1,4 +1,4 @@
-name: Run Certbot Init in Prod Env
+name: Run Certbot Init / Renew in Prod Env
 
 # configure manual trigger only 
 on: workflow_dispatch
